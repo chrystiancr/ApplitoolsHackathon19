@@ -11,41 +11,41 @@ import org.testng.annotations.Test;
 
 public class TraditionalTests extends TestBase {
 
-	@Test
+	@Test(priority = 1)
 	public void loginPageUiElementsTest() {
 		assertTrue(login.checkPageElements());
 	}
 
-	@Test
+	@Test(priority = 2)
 	public void loginWithoutData() {
 		login.doLogin("", "");
 		assertEquals(login.getAlertMessage(), "Both Username and Password must be present");
 	}
 
-	@Test(parameters = "username")
+	@Test(priority = 3, parameters = "username")
 	public void loginWithoutPassoword(String username) {
 		login.doLogin(username, "");
 		assertEquals(login.getAlertMessage(), "Password must be present");
 	}
 
-	@Test(parameters = "password")
+	@Test(priority = 4, parameters = "password")
 	public void loginWithourUser(String password) {
 		login.doLogin("", password);
 		assertEquals(login.getAlertMessage(), "Username must be present");
 	}
 
-	@Test(parameters = { "username", "password" })
+	@Test(priority = 5, parameters = { "username", "password" })
 	public void doLoginTest(String username, String password) {
 		login.doLogin(username, password);
 	}
 
-	@Test
+	@Test(priority = 6)
 	public void loginWithWhiteSpace() {
 		login.doLogin("   ", "   ");
 		assertEquals(login.getAlertMessage(), "Both Username and Password must be present");
 	}
 
-	@Test(parameters = { "username", "password" })
+	@Test(priority = 7, parameters = { "username", "password" })
 	public void tableSortTest(String username, String password) {
 		login.doLogin(username, password);
 		dashboard.amountButtonClick();
@@ -63,7 +63,7 @@ public class TraditionalTests extends TestBase {
 
 	}
 
-	@Test(parameters = { "username", "password" })
+	@Test(priority = 8, parameters = { "username", "password" })
 	public void canvasChartTest(String username, String password) throws Exception {
 		login.doLogin(username, password);
 		dashboard.showExpensesChartCLick();
@@ -82,7 +82,7 @@ public class TraditionalTests extends TestBase {
 
 	}
 
-	@Test(parameters = { "username", "password" })
+	@Test(priority = 10, parameters = { "username", "password" })
 	public void dynamicContentTest(String username, String password) {
 		driver.get(URL_DC);
 		login.doLogin(username, password);
