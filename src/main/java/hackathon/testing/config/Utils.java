@@ -25,7 +25,7 @@ import org.openqa.selenium.safari.SafariDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Utils {
-	static WebDriver driver;
+	public WebDriver driver;
 
 	public Properties readPropertiesFile(String filePath) {
 		Properties prop = new Properties();
@@ -75,7 +75,7 @@ public class Utils {
 				driver = new InternetExplorerDriver();
 				break;
 			default:
-				System.out.println("Invalid browser parameter! Try Chrome, FireFox, Safari, Opera, Edge ou IE'.");
+				System.err.println("Invalid browser parameter! Try Chrome, FireFox, Safari, Opera, Edge ou IE'.");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -91,13 +91,13 @@ public class Utils {
 		CHROME, FIREFOX, SAFARI, EDGE, OPERA, IE;
 	}
 
-	public File takeScreenShot(String filePath) throws Exception {
+	public File takeScreenShot(String filePath) throws InterruptedException, IOException {
 		Thread.sleep(1000);
 		TakesScreenshot scrShot = ((TakesScreenshot) driver);
-		File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
-		File DestFile = new File(filePath);
-		FileUtils.copyFile(SrcFile, DestFile);
-		return DestFile;
+		File srcFile = scrShot.getScreenshotAs(OutputType.FILE);
+		File destFile = new File(filePath);
+		FileUtils.copyFile(srcFile, destFile);
+		return destFile;
 	}
 
 	public boolean imageComparison(File file1, File file2) throws IOException {
