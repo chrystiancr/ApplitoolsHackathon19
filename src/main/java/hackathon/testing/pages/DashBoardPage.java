@@ -53,6 +53,9 @@ public class DashBoardPage extends PageObject {
 	@FindBy(id = "showExpensesChart")
 	WebElement showExpensesChart;
 
+	@FindBy(id = "canvas")
+	WebElement canvasChart;
+
 	@FindBy(id = "addDataset")
 	WebElement addDatasetButton;
 
@@ -139,11 +142,18 @@ public class DashBoardPage extends PageObject {
 	public void addDatasetButtonCLick() {
 		waiter.until(ExpectedConditions.visibilityOf(addDatasetButton)).click();
 	}
-	
+
 	public void showExpensesChartCLick() {
 		waiter.until(ExpectedConditions.visibilityOf(showExpensesChart)).click();
 	}
-	
+
+	public boolean checkCanvasPresence() {
+		if (canvasChart.isDisplayed()) {
+			return true;
+		}
+		return false;
+	}
+
 	public boolean checkGifsPresence() {
 
 		if (gif1.isDisplayed() && gif1.getAttribute("style").equals("display: block;")) {
