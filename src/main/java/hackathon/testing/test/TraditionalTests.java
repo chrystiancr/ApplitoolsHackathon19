@@ -37,6 +37,7 @@ public class TraditionalTests extends TestBase {
 	@Test(priority = 5, parameters = { "username", "password" })
 	public void doLoginTest(String username, String password) {
 		login.doLogin(username, password);
+		assertEquals(driver.getCurrentUrl(), "https://demo.applitools.com/hackathonApp.html");
 	}
 
 	@Test(priority = 6, description = "out of scope")
@@ -83,7 +84,7 @@ public class TraditionalTests extends TestBase {
 
 	}
 
-	@Test(priority = 10, parameters = { "username", "password" })
+	@Test(priority = 9, parameters = { "username", "password" })
 	public void dynamicContentTest(String username, String password) {
 		driver.get(URL_DC);
 		login.doLogin(username, password);

@@ -48,7 +48,8 @@
 		<dependency>
 			<groupId>com.applitools</groupId>
 			<artifactId>eyes-appium-java4</artifactId>
-			<version>4.0.11</version>
+			<version>RELEASE</version>
 		</dependency>
+
 	</dependencies>
 </project>
