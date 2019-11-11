@@ -16,17 +16,26 @@ public class LoginPage extends PageObject {
 	@FindBy(css = "body > div > div > form > div:nth-child(1) > div")
 	WebElement userIcon;
 
+	@FindBy(css = "body > div > div > form > div:nth-child(1) > label")
+	WebElement userNameLabel;
+
 	@FindBy(id = "username")
 	WebElement userName;
 
 	@FindBy(css = "body > div > div > form > div:nth-child(2) > div")
 	WebElement authenticationIcon;
 
+	@FindBy(css = "body > div > div > form > div:nth-child(2) > label")
+	WebElement passwordLabel;
+
 	@FindBy(id = "password")
 	WebElement password;
 
 	@FindBy(id = "log-in")
 	WebElement loginButton;
+
+	@FindBy(css = "body > div > div > form > div.buttons-w > div.form-check-inline > label")
+	WebElement remeberLabel;
 
 	@FindBy(css = "body > div > div > form > div.buttons-w > div.form-check-inline > label > input")
 	WebElement remeberButton;
@@ -80,11 +89,14 @@ public class LoginPage extends PageObject {
 		waiter.until(ExpectedConditions.visibilityOf(logo));
 		waiter.until(ExpectedConditions.textToBePresentInElement(formTitle, "Login Form"));
 		waiter.until(ExpectedConditions.visibilityOf(userIcon));
-		waiter.until(ExpectedConditions.visibilityOf(userName));
+		waiter.until(ExpectedConditions.textToBePresentInElement(userNameLabel, "Username"));
+		waiter.until(ExpectedConditions.textToBePresentInElement(userName, "Enter your username"));
 		waiter.until(ExpectedConditions.visibilityOf(authenticationIcon));
-		waiter.until(ExpectedConditions.visibilityOf(password));
+		waiter.until(ExpectedConditions.textToBePresentInElement(passwordLabel, "Password"));
+		waiter.until(ExpectedConditions.textToBePresentInElement(password, "Enter your password"));
 		waiter.until(ExpectedConditions.elementToBeClickable(loginButton));
 		waiter.until(ExpectedConditions.elementToBeClickable(remeberButton));
+		waiter.until(ExpectedConditions.textToBePresentInElement(remeberLabel, "Remember Me"));
 		waiter.until(ExpectedConditions.elementToBeClickable(twitterIcon));
 		waiter.until(ExpectedConditions.elementToBeClickable(facebookIcon));
 		waiter.until(ExpectedConditions.elementToBeClickable(linkedinIcon));

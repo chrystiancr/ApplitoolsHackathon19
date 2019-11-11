@@ -39,7 +39,7 @@ public class TraditionalTests extends TestBase {
 		login.doLogin(username, password);
 	}
 
-	@Test(priority = 6)
+	@Test(priority = 6, description = "out of scope")
 	public void loginWithWhiteSpace() {
 		login.doLogin("   ", "   ");
 		assertEquals(login.getAlertMessage(), "Both Username and Password must be present");
@@ -67,6 +67,7 @@ public class TraditionalTests extends TestBase {
 	public void canvasChartTest(String username, String password) throws Exception {
 		login.doLogin(username, password);
 		dashboard.showExpensesChartCLick();
+		dashboard.checkCanvasPresence();
 
 		File baseImagePath = new File("images/base_canvas_page.jpg");
 		File currentImagePath = util.takeScreenShot("images/current_canvas_page.jpg");
