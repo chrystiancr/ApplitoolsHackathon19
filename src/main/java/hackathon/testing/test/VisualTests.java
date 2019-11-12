@@ -1,6 +1,10 @@
 package hackathon.testing.test;
 
+import org.openqa.selenium.By;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
+
+import com.applitools.eyes.MatchLevel;
 
 public class VisualTests extends TestBase {
 
@@ -22,7 +26,7 @@ public class VisualTests extends TestBase {
 	}
 
 	@Test(priority = 4, parameters = "password")
-	public void loginWithourUser(String password) {
+	public void loginWithoutUser(String password) {
 		login.doLogin("", password);
 		checkScreen("login4");
 	}
@@ -33,6 +37,7 @@ public class VisualTests extends TestBase {
 		checkScreen("login5");
 	}
 
+	@Ignore
 	@Test(priority = 6, description = "out of scope")
 	public void loginWithWhiteSpace() {
 		login.doLogin("   ", "   ");
@@ -42,29 +47,27 @@ public class VisualTests extends TestBase {
 	@Test(priority = 7, parameters = { "username", "password" })
 	public void tableSortTest(String username, String password) {
 		login.doLogin(username, password);
-		checkScreen("dashboard");
-
 		dashboard.amountButtonClick();
-		checkScreen("dashboard2");
+		checkRegion(By.id("transactionsTable"), "transactionsTable");
 	}
 
 	@Test(priority = 8, parameters = { "username", "password" })
 	public void canvasChartTest(String username, String password) throws Exception {
 		login.doLogin(username, password);
-		checkScreen("dashboard3");
-
 		dashboard.showExpensesChartCLick();
-		checkScreen("canvas");
+		checkRegion(By.id("canvas"), "canvas");
 
 		dashboard.addDatasetButtonCLick();
-		checkScreen("canvas2");
+		checkRegion(By.id("canvas"), "canvas", "After");
 	}
 
 	@Test(priority = 10, parameters = { "username", "password" })
 	public void dynamicContentTest(String username, String password) {
 		driver.get(URL_DC);
 		login.doLogin(username, password);
-		checkScreen("gifs");
+		eyes.setMatchLevel(MatchLevel.LAYOUT);
+		checkRegion(By.cssSelector(
+				"body > div > div.layout-w > div.content-w > div > div > div.element-wrapper.compact.pt-4 > div.element-box-tp > div > div"),
+				"gifs");
 	}
-
 }

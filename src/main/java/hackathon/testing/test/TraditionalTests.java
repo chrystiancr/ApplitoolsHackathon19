@@ -29,7 +29,7 @@ public class TraditionalTests extends TestBase {
 	}
 
 	@Test(priority = 4, parameters = "password")
-	public void loginWithourUser(String password) {
+	public void loginWithoutUser(String password) {
 		login.doLogin("", password);
 		assertEquals(login.getAlertMessage(), "Username must be present");
 	}
