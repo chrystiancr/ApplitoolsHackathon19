@@ -2,6 +2,7 @@ package hackathon.testing.test;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Ignore;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.applitools.eyes.MatchLevel;
@@ -19,19 +20,22 @@ public class VisualTests extends TestBase {
 		checkScreen("login2");
 	}
 
-	@Test(priority = 3, parameters = "username")
+	@Parameters("username")
+	@Test(priority = 3)
 	public void loginWithoutPassoword(String username) {
 		login.doLogin(username, "");
 		checkScreen("login3");
 	}
 
-	@Test(priority = 4, parameters = "password")
+	@Parameters("password")
+	@Test(priority = 4)
 	public void loginWithoutUser(String password) {
 		login.doLogin("", password);
 		checkScreen("login4");
 	}
 
-	@Test(priority = 5, parameters = { "username", "password" })
+	@Parameters({ "username", "password" })
+	@Test(priority = 5)
 	public void doLoginTest(String username, String password) {
 		login.doLogin(username, password);
 		checkScreen("login5");
@@ -44,14 +48,16 @@ public class VisualTests extends TestBase {
 		checkScreen("login6");
 	}
 
-	@Test(priority = 7, parameters = { "username", "password" })
+	@Parameters({ "username", "password" })
+	@Test(priority = 7)
 	public void tableSortTest(String username, String password) {
 		login.doLogin(username, password);
 		dashboard.amountButtonClick();
 		checkRegion(By.id("transactionsTable"), "transactionsTable");
 	}
 
-	@Test(priority = 8, parameters = { "username", "password" })
+	@Parameters({ "username", "password" })
+	@Test(priority = 8)
 	public void canvasChartTest(String username, String password) throws Exception {
 		login.doLogin(username, password);
 		dashboard.showExpensesChartCLick();
@@ -61,7 +67,8 @@ public class VisualTests extends TestBase {
 		checkRegion(By.id("canvas"), "canvas", "After");
 	}
 
-	@Test(priority = 10, parameters = { "username", "password" })
+	@Parameters({ "username", "password" })
+	@Test(priority = 9)
 	public void dynamicContentTest(String username, String password) {
 		driver.get(URL_DC);
 		login.doLogin(username, password);

@@ -7,6 +7,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.testng.annotations.Ignore;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class TraditionalTests extends TestBase {
@@ -22,31 +24,36 @@ public class TraditionalTests extends TestBase {
 		assertEquals(login.getAlertMessage(), "Both Username and Password must be present");
 	}
 
-	@Test(priority = 3, parameters = "username")
+	@Parameters("username")
+	@Test(priority = 3)
 	public void loginWithoutPassoword(String username) {
 		login.doLogin(username, "");
 		assertEquals(login.getAlertMessage(), "Password must be present");
 	}
 
-	@Test(priority = 4, parameters = "password")
+	@Parameters("password")
+	@Test(priority = 4)
 	public void loginWithoutUser(String password) {
 		login.doLogin("", password);
 		assertEquals(login.getAlertMessage(), "Username must be present");
 	}
 
-	@Test(priority = 5, parameters = { "username", "password" })
+	@Parameters({ "username", "password" })
+	@Test(priority = 5)
 	public void doLoginTest(String username, String password) {
 		login.doLogin(username, password);
 		assertEquals(driver.getCurrentUrl(), "https://demo.applitools.com/hackathonApp.html");
 	}
 
+	@Ignore
 	@Test(priority = 6, description = "out of scope")
 	public void loginWithWhiteSpace() {
 		login.doLogin("   ", "   ");
 		assertEquals(login.getAlertMessage(), "Both Username and Password must be present");
 	}
 
-	@Test(priority = 7, parameters = { "username", "password" })
+	@Parameters({ "username", "password" })
+	@Test(priority = 7)
 	public void tableSortTest(String username, String password) {
 		login.doLogin(username, password);
 		dashboard.amountButtonClick();
@@ -64,7 +71,8 @@ public class TraditionalTests extends TestBase {
 
 	}
 
-	@Test(priority = 8, parameters = { "username", "password" })
+	@Parameters({ "username", "password" })
+	@Test(priority = 8)
 	public void canvasChartTest(String username, String password) throws Exception {
 		login.doLogin(username, password);
 		dashboard.showExpensesChartCLick();
@@ -84,7 +92,8 @@ public class TraditionalTests extends TestBase {
 
 	}
 
-	@Test(priority = 9, parameters = { "username", "password" })
+	@Parameters({ "username", "password" })
+	@Test(priority = 9)
 	public void dynamicContentTest(String username, String password) {
 		driver.get(URL_DC);
 		login.doLogin(username, password);
